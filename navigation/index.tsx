@@ -9,7 +9,7 @@ import { ColorSchemeName } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
-import BottomTabNavigator from "./BottomTabNavigator";
+import MainTabNavigator from "./MainTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import AppColors from "../constants/AppColors";
 import App from "../App";
@@ -41,6 +41,8 @@ function RootNavigator() {
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: AppColors.light.tint,
+          shadowOpacity:0,
+          elevation:0
 				},
 				headerTintColor: AppColors.light.background,
 				headerTitleAlign: "left",
@@ -48,7 +50,7 @@ function RootNavigator() {
 			}}>
 			<Stack.Screen
 				name='Root'
-				component={BottomTabNavigator}
+				component={MainTabNavigator}
 				options={{
 					title: "WhatsApp",
 					headerRight: () => (
