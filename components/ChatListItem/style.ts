@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
 	lastMessage: {
 		fontSize: 16,
 		color: "grey",
-		marginTop:5
+		marginTop:5,
 	},
 	time: {
-		fontSize: 16,
+		fontSize: 14,
 		color: "grey",
 	}
 });
