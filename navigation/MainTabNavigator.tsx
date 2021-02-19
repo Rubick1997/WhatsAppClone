@@ -5,7 +5,7 @@ import * as React from "react";
 import { color } from "react-native-reanimated";
 import Colors from "../constants/AppColors";
 import useColorScheme from "../hooks/useColorScheme";
-import ChatScreen from "../screens/ChatScreen";
+import ChatsScreen from "../screens/ChatsScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import { Dimensions, View } from "react-native";
 import { MainTabParamList, TabOneParamList, TabTwoParamList } from "../types";
@@ -46,7 +46,7 @@ export default function MainTabNavigator() {
             
 					}}
 				/>
-			<MainTab.Screen name='Chats' component={TabTwoNavigator} />
+			<MainTab.Screen name='Chats' component={ChatsScreen} />
 			<MainTab.Screen name='Status' component={TabTwoNavigator} />
 			<MainTab.Screen name='Calls' component={TabTwoNavigator} />
 		</MainTab.Navigator>
@@ -62,7 +62,7 @@ function TabOneNavigator() {
 		<TabOneStack.Navigator>
 			<TabOneStack.Screen
 				name='TabOneScreen'
-				component={ChatScreen}
+				component={ChatsScreen}
 				options={{ headerTitle: "Tab One Title" }}
 			/>
 		</TabOneStack.Navigator>
