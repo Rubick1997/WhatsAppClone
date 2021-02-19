@@ -6,7 +6,7 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
 import MainTabNavigator from "./MainTabNavigator";
@@ -15,8 +15,8 @@ import AppColors from "../constants/AppColors";
 import App from "../App";
 import { View, Text } from "react-native";
 import { Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
-// If you are not familiar with React Navigation, we recommend going through the
-// "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
+import ChatRoomScreen from "../screens/ChatRoomScreen";
+import ChatHeader from "../components/ChatHeader"
 export default function Navigation({
 	colorScheme,
 }: {
@@ -41,8 +41,8 @@ function RootNavigator() {
 			screenOptions={{
 				headerStyle: {
 					backgroundColor: AppColors.light.tint,
-          shadowOpacity:0,
-          elevation:0
+					shadowOpacity: 0,
+					elevation: 0,
 				},
 				headerTintColor: AppColors.light.background,
 				headerTitleAlign: "left",
@@ -59,7 +59,7 @@ function RootNavigator() {
 								flexDirection: "row",
 								width: 60,
 								justifyContent: "space-between",
-                marginRight:10
+								marginRight: 10,
 							}}>
 							<Octicons name='search' size={22} color={"white"} />
 							<MaterialCommunityIcons
@@ -72,10 +72,17 @@ function RootNavigator() {
 				}}
 			/>
 			<Stack.Screen
+				name='Chat Room'
+				component={ChatRoomScreen}
+				options={
+					({route}) => ({title: route.params.name})
+				}
+			/>
+			<Stack.Screen
 				name='NotFound'
 				component={NotFoundScreen}
-				options={{ title: "Oops!" }}
-			/>
+				options={{ title: "Oops!"}}
+			/> 
 		</Stack.Navigator>
 	);
 }
