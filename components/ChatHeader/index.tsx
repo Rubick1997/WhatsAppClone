@@ -1,12 +1,23 @@
-import React from 'react';
-import{View,Text} from "react-native"
-const ChatHeader = ({props}) => {
-    console.log(props)
-    return (
-        <View>
-            <Text>Hey</Text>
-        </View>
-    );
+import React from "react";
+import { View, Text, Image } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import styles from "./style";
+
+const ChatHeader = () => {
+	const route = useRoute();
+
+	const user = route.params;
+	return (
+		<View style={styles.header}>
+				<View style={styles.leftContainer}>
+					<Image source={{ uri: user.uri }} style={styles.avatar} />
+					{/* <View>
+						<Text style={styles.headerTitle}>{user.name}</Text>
+					</View> */}
+				</View>
+		</View>
+	); 
 };
+
 
 export default ChatHeader;
