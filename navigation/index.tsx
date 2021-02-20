@@ -3,15 +3,10 @@ import {
 	DefaultTheme,
 	DarkTheme,
 } from "@react-navigation/native";
-import {
-	Octicons,
-	MaterialCommunityIcons,
-	MaterialIcons,
-	FontAwesome5,
-  } from '@expo/vector-icons';
 import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
+import { Colors, Header } from "react-native/Libraries/NewAppScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
 import MainTabNavigator from "./MainTabNavigator";
@@ -20,8 +15,14 @@ import AppColors from "../constants/AppColors";
 import App from "../App";
 import { View, Text } from "react-native";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
-// import ChatHeader from "../components/ChatHeader";
-
+import ChatHeader from "../components/ChatHeader";
+import {
+	AntDesign ,
+	Octicons,
+	MaterialCommunityIcons,
+	MaterialIcons,
+	FontAwesome5,
+  } from '@expo/vector-icons';
 export default function Navigation({
 	colorScheme,
 }: {
@@ -81,8 +82,9 @@ function RootNavigator() {
 				component={ChatRoomScreen}
 				options={
 					({ route })  => ({
-						// headerLeft: () => <ChatHeader />,
-						title:route.params.name,
+						headerBackTitleVisible:false,
+						headerBackImage:()=> <AntDesign name="arrowleft" size={22} color="white" />,
+						headerTitle: () => <ChatHeader />,
 						headerRight: () => (
 						  <View style={{
 							flexDirection: 'row',

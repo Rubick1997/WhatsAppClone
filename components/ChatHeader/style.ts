@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
         height:"100%",
-        marginBottom:9
+        marginBottom:9,
+		justifyContent:"flex-start"
 	},
 	leftContainer: {
 		flexDirection: "row",

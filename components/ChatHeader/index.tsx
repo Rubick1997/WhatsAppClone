@@ -11,9 +11,9 @@ const ChatHeader = () => {
 		<View style={styles.header}>
 				<View style={styles.leftContainer}>
 					<Image source={{ uri: user.uri }} style={styles.avatar} />
-					{/* <View>
+					<View>
 						<Text style={styles.headerTitle}>{user.name}</Text>
-					</View> */}
+					</View>
 				</View>
 		</View>
 	); 
