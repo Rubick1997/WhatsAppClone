@@ -75,15 +75,15 @@ export default [
 					"https://cdn.vox-cdn.com/thumbor/CmMjXu8KUUpGp0nMRWCYtKBJURY=/1400x788/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19921093/mgidarccontentnick.comc008fa9d_d.png",
 			},
 			{
-				id: "u5",
+				id: "u4",
 				name: "Vlad",
 				imageUri:
 					"https://cdn.vox-cdn.com/thumbor/CmMjXu8KUUpGp0nMRWCYtKBJURY=/1400x788/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/19921093/mgidarccontentnick.comc008fa9d_d.png",
 			},
 		],
 		lastMessage: {
-			id: "m4",
-			content: "Can you review my last merge",
+			id: "m3",
+			content: "How are you ?",
 			createdAt: "2020-10-02T14:48:00.000Z",
 		},
 	},
