@@ -17,12 +17,14 @@ import { View, Text } from "react-native";
 import ChatRoomScreen from "../screens/ChatRoomScreen";
 import ChatHeader from "../components/ChatHeader";
 import {
-	AntDesign ,
+	AntDesign,
 	Octicons,
 	MaterialCommunityIcons,
 	MaterialIcons,
 	FontAwesome5,
-  } from '@expo/vector-icons';
+} from "@expo/vector-icons";
+import ContactsScreen from "../screens/ContactsScreen";
+
 export default function Navigation({
 	colorScheme,
 }: {
@@ -78,34 +80,41 @@ function RootNavigator() {
 				}}
 			/>
 			<Stack.Screen
-				name='Chat Room'
+				name='ChatRoom'
 				component={ChatRoomScreen}
-				options={
-					({ route })  => ({
-						headerBackTitleVisible:false,
-						headerBackImage:()=> <AntDesign name="arrowleft" size={22} color="white" />,
-						headerTitle: () => <ChatHeader />,
-						headerRight: () => (
-						  <View style={{
-							flexDirection: 'row',
-							width: 100,
-							justifyContent: 'space-between',
-							marginRight: 10,
-						  }}>
-							<FontAwesome5 name="video" size={22} color={'white'} />
-							<MaterialIcons name="call" size={22} color={'white'} />
-							<MaterialCommunityIcons name="dots-vertical" size={22} color={'white'} />
-						  </View>
-						)
-					  })
-					
-				}
+				options={({ route }) => ({
+					headerBackTitleVisible: false,
+					headerBackImage: () => (
+						<AntDesign name='arrowleft' size={22} color='white' />
+					),
+					headerTitle: () => <ChatHeader />,
+					headerRight: () => (
+						<View
+							style={{
+								flexDirection: "row",
+								width: 100,
+								justifyContent: "space-between",
+								marginRight: 10,
+							}}>
+							<FontAwesome5 name='video' size={22} color={"white"} />
+							<MaterialIcons name='call' size={22} color={"white"} />
+							<MaterialCommunityIcons
+								name='dots-vertical'
+								size={22}
+								color={"white"}
+							/>
+						</View>
+					),
+				})}
 			/>
+			<Stack.Screen name='Contacts' component={ContactsScreen} />
+			
 			<Stack.Screen
 				name='NotFound'
 				component={NotFoundScreen}
 				options={{ title: "Oops!" }}
 			/>
+			
 		</Stack.Navigator>
 	);
 }
