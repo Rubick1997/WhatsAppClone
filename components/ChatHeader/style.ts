@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
 		width: "100%",
         height:"100%",
         marginBottom:9,
-		justifyContent:"flex-start"
+		alignSelf:"flex-start"
 	},
 	leftContainer: {
 		flexDirection: "row",

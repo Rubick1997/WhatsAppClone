@@ -24,14 +24,15 @@ export type User = {
 	imageUri: String;
 };
 
-export type Message={
-  id:String;
-  content:string;
-  createdAt:string;
-}
+export type Message = {
+	id: String;
+	content: string;
+	createdAt: string;
+	user: String;
+};
 
 export type ChatRoom = {
 	id: String;
-	users: [User];
+	users: User[];
 	lastMessage: Message;
 };
