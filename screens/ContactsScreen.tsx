@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import { listUsers } from "../src/graphql/queries";
 
+
 export default function ContactsScreen() {
 	const [users, setUsers] = useState([]);
 
