@@ -18,40 +18,38 @@ function App() {
 	const colorScheme = useColorScheme();
 	//runs only when app is first mounted
 
-	useEffect( () => {
+	useEffect(() => {
+		//get authentication from Auth
 		const fetchUser = async () => {
-		  const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
-	
-		  if (userInfo) {
-			const userData = await API.graphql(
-			  graphqlOperation(
-				getUser,
-				{ id: userInfo.attributes.sub }
-				)
-			)
-	
-			if (userData.data.getUser) {
-			  console.log("User is already registered in database");
-			  return;
+			const userInfo = await Auth.currentAuthenticatedUser({
+				bypassCache: true,
+			});
+
+			if (userInfo) {
+				const userData = await API.graphql(
+					graphqlOperation(getUser, { id: userInfo.attributes.sub })
+				);
+
+				//check if the user exists
+
+				if (userData.data.getUser) {
+					console.log("User is already registered in database");
+					return;
+				}
+
+				const newUser = {
+					id: userInfo.attributes.sub,
+					name: userInfo.username,
+					imageUri: randomImages,
+					status: "Hey, I am using WhatsApp",
+				};
+
+				//create the user
+				await API.graphql(graphqlOperation(createUser, { input: newUser }));
 			}
-	
-			const newUser = {
-			  id: userInfo.attributes.sub,
-			  name: userInfo.username,
-			  imageUri: randomImages,
-			  status: 'Hey, I am using WhatsApp',
-			}
-	
-			await API.graphql(
-			  graphqlOperation(
-				createUser,
-				{ input: newUser }
-			  )
-			)
-		  }
-		}
+		};
 		fetchUser();
-	  }, [])
+	}, []);
 
 	if (!isLoadingComplete) {
 		return null;
