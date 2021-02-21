@@ -2,8 +2,12 @@ import React from "react";
 import { User } from "../../types";
 import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
 import styles from "./style";
-import moment from "moment";
 import { useNavigation } from "@react-navigation/native";
+import { API, graphqlOperation, Auth } from "aws-amplify";
+import {
+	createChatRoom,
+	createChatRoomUser,
+} from "../../src/graphql/mutations";
 
 export type ContactListItemProps = {
 	user: User;
@@ -13,7 +17,48 @@ const ContactListItem = (props: ContactListItemProps) => {
 	const { user } = props;
 	const navigation = useNavigation();
 
-	const onClick = () => {
+	const onClick = async () => {
+		try {
+			//create new chat room
+			const newChatRoomData = await API.graphql(
+				graphqlOperation(createChatRoom, {
+					input: {},
+				})
+			);
+
+			if (!newChatRoomData.data) {
+				console.log("Failed to create a Chat Room");
+				return;
+			}
+			const newChatRoom = newChatRoomData.data.createChatRoom;
+			//add user to the chat room
+			await API.graphql(
+				graphqlOperation(createChatRoomUser, {
+					input: {
+						userID: user.id,
+						chatRoomID: newChatRoom.id,
+					},
+				})
+			);
+			//add authenticated user to the chatroom
+			const userInfo = await Auth.currentAuthenticatedUser();
+			await API.graphql(
+				graphqlOperation(createChatRoomUser, {
+					input: {
+						userID: userInfo.attributes.sub,
+						chatRoomID: newChatRoom.id,
+					},
+				})
+			);
+
+			navigation.navigate("ChatRoom", {
+				id: newChatRoom.id,
+				name: user.name,
+				uri: user.imageUri,
+			});
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	return (
@@ -23,9 +68,7 @@ const ContactListItem = (props: ContactListItemProps) => {
 					<Image source={{ uri: user.imageUri }} style={styles.avatar} />
 					<View>
 						<Text style={styles.username}>{user.name}</Text>
-						<Text style={styles.status}>
-							{user.status}
-						</Text>
+						<Text style={styles.status}>{user.status}</Text>
 					</View>
 				</View>
 			</View>
