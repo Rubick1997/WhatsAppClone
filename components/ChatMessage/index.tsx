@@ -4,15 +4,16 @@ import { Message } from "../../types";
 import moment from "moment";
 import styles from "./styles";
 
-export type ChangeMessageProps = {
+export type ChatMessageProps = {
 	message: Message;
+	myId: String;
 };
 
-const ChatMessage = (props: ChangeMessageProps) => {
-	const { message } = props;
+const ChatMessage = (props: ChatMessageProps) => {
+	const { message, myId } = props;
 
 	const isMyMessage = () => {
-		return message.user.id === "u1";
+		return message.user.id === myId;
 	};
 
 	return (
