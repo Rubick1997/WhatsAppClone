@@ -82,11 +82,8 @@ function RootNavigator() {
 			<Stack.Screen
 				name='ChatRoom'
 				component={ChatRoomScreen}
-				options={({ route }) => ({
+				options={{
 					headerBackTitleVisible: false,
-					headerBackImage: () => (
-						<AntDesign name='arrowleft' size={22} color='white' />
-					),
 					headerTitle: () => <ChatHeader />,
 					headerRight: () => (
 						<View
@@ -105,16 +102,19 @@ function RootNavigator() {
 							/>
 						</View>
 					),
-				})}
+				}}
 			/>
-			<Stack.Screen name='Contacts' component={ContactsScreen} />
-			
+			<Stack.Screen
+				name='Contacts'
+				component={ContactsScreen}
+				options={{ headerBackTitleVisible: false }}
+			/>
+
 			<Stack.Screen
 				name='NotFound'
 				component={NotFoundScreen}
 				options={{ title: "Oops!" }}
 			/>
-			
 		</Stack.Navigator>
 	);
 }

@@ -11,7 +11,7 @@ import { getUser } from "./src/graphql/queries";
 import { createUser } from "./src/graphql/mutations";
 Amplify.configure(Config);
 
-const randomImages = "https://picsum.photos/200/300?random=2";
+const randomImages = "https://loremflickr.com/640/360";
 
 function App() {
 	const isLoadingComplete = useCachedResources();
