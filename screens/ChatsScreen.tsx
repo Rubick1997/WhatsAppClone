@@ -7,8 +7,6 @@ import {
   graphqlOperation,
   Auth,
 } from 'aws-amplify';
-
-import chatRooms from '../data/ChatRooms';
 import NewMessageButton from "../components/NewMessageButton";
 import {useEffect, useState} from "react";
 
@@ -30,7 +28,6 @@ export default function ChatsScreen() {
             }
           )
         )
-
         setChatRooms(userData.data.getUser.chatRoomUser.items)
       } catch (e) {
         console.log(e);

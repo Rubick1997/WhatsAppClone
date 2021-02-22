@@ -13,7 +13,7 @@ const ChatRoomScreen = () => {
 	const [myId, setMyId] = useState(null);
 
 	const route = useRoute();
-	console.log(route.params.id);
+	
 	useEffect(() => {
 		const fetchMessages = async () => {
 			const messagesData = await API.graphql(

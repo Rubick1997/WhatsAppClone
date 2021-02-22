@@ -12,27 +12,28 @@ export type ChatListItemProps = {
 
 const ChatListItem = (props: ChatListItemProps) => {
 	const { chatRoom } = props;
-	const [otherUser, setOtherUser] = useState();
+	const [otherUser, setOtherUser] = useState(null);
+
 	const navigation = useNavigation();
-	
+
 	useEffect(() => {
 		const getOtherUser = async () => {
-		  const userInfo = await Auth.currentAuthenticatedUser();
-		  if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
-			setOtherUser(chatRoom.chatRoomUsers.items[1].user);
-		  } else {
-			setOtherUser(chatRoom.chatRoomUsers.items[0].user);
-		  }
-		}
+			const userInfo = await Auth.currentAuthenticatedUser();
+			if (chatRoom.chatRoomUsers.items[0].user.id === userInfo.attributes.sub) {
+				setOtherUser(chatRoom.chatRoomUsers.items[1].user);
+			} else {
+				setOtherUser(chatRoom.chatRoomUsers.items[0].user);
+			}
+			console.log(otherUser);
+		};
 		getOtherUser();
-	  }, [])
-	
+	}, []);
 
 	const onClick = () => {
 		navigation.navigate("ChatRoom", {
 			id: chatRoom.id,
 			name: otherUser.name,
-			uri: otherUser.imageUri,
+			imageUri:otherUser.imageUri
 		});
 	};
 
@@ -47,8 +48,8 @@ const ChatListItem = (props: ChatListItemProps) => {
 					<Image source={{ uri: otherUser.imageUri }} style={styles.avatar} />
 					<View>
 						<Text style={styles.username}>{otherUser.name}</Text>
-						<Text style={styles.lastMessage}>
-							{chatRoom.lastMessage ? chatRoom.lastMessage.content : ""}
+						<Text numberOfLines={2} style={styles.lastMessage}>
+							{chatRoom.lastMessage ? `${chatRoom.lastMessage.user.name}: ${chatRoom.lastMessage.content}` : ""}
 						</Text>
 					</View>
 				</View>

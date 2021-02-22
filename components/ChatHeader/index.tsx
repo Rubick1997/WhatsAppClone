@@ -10,7 +10,7 @@ const ChatHeader = () => {
 	return (
 		<View style={styles.header}>
 				<View style={styles.leftContainer}>
-					<Image source={{ uri: user.uri }} style={styles.avatar} />
+					<Image source={{ uri: user.imageUri }} style={styles.avatar} />
 					<View>
 						<Text style={styles.headerTitle}>{user.name}</Text>
 					</View>
