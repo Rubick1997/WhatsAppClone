@@ -54,7 +54,7 @@ const ContactListItem = (props: ContactListItemProps) => {
 			navigation.navigate("ChatRoom", {
 				id: newChatRoom.id,
 				name: user.name,
-				uri: user.imageUri,
+				imageUri: user.imageUri,
 			});
 		} catch (e) {
 			console.log(e);
