@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, ImageBackground} from "react-native";
+import { View, ImageBackground } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { FlatList } from "react-native-gesture-handler";
 import ChatMessage from "../components/ChatMessage";
@@ -15,21 +15,20 @@ const ChatRoomScreen = () => {
 
 	const route = useRoute();
 
-	const fetchMessages = async () => {
-		const messagesData = await API.graphql(
-			graphqlOperation(messagesByChatRoom, {
-				chatRoomID: route.params.id,
-				sortDirection: "DESC",
-			})
-		);
-
-		console.log("FETCH MESSAGES");
-		setMessages(messagesData.data.messagesByChatRoom.items);
-	};
-
 	useEffect(() => {
-		fetchMessages();
-	}, []);
+		const fetchMessages = async () => {
+			const messagesData = await API.graphql(
+				graphqlOperation(messagesByChatRoom, {
+					chatRoomID: route.params.id,
+					sortDirection: "DESC",
+				})
+			);
+	
+			console.log("FETCH MESSAGES");
+			setMessages(messagesData.data.messagesByChatRoom.items);
+		};
+		fetchMessages()
+	}, [messages]);
 
 	useEffect(() => {
 		const getMyId = async () => {
@@ -50,22 +49,19 @@ const ChatRoomScreen = () => {
 					console.log("Message is in another room!");
 					return;
 				}
-
-				fetchMessages();
 			},
 		});
-
 		return () => subscription.unsubscribe();
 	}, []);
 	return (
-			<ImageBackground style={{ width: "100%", height: "100%" }} source={BG}>
-				<FlatList
-					data={messages}
-					renderItem={({ item }) => <ChatMessage myId={myId} message={item} />}
-					inverted
-				/>
-				<InputBox chatRoomID={route.params.id} />
-			</ImageBackground>
+		<ImageBackground style={{ width: "100%", height: "100%" }} source={BG}>
+			<FlatList
+				data={messages}
+				renderItem={({ item }) => <ChatMessage myId={myId} message={item} />}
+				inverted
+			/>
+			<InputBox chatRoomID={route.params.id} />
+		</ImageBackground>
 	);
 };
 
